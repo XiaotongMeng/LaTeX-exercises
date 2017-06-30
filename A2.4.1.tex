@@ -1,0 +1,51 @@
+\documentclass{scrartcl}
+
+
+
+
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{marvosym}
+\DeclareUnicodeCharacter{20AC}{\EUR}
+%\usepackage{nameref}
+
+
+
+\begin{document}
+
+\title{Unser erstes strukturiertes Dokument}
+\author{Xiaotong Meng}
+\date{Datum}
+\maketitle
+
+
+
+
+\tableofcontents
+
+\section*{Hier gehts los}
+Es wird ein bisschen gegliedert(zunächst ohne Nummerierung).
+
+\section{Hier wird dann nummeriert}
+\subsection{Eine Ebene tiefer} \label{first label}
+
+
+%\nameref{}
+
+\subsubsection{und noch tiefer}
+
+\section[kurztitel] {Hier soll ein Kuztitel ins Inhaltverzeichnis} 
+
+\paragraph*{Dann noch ein Paragraph}
+ziemlich Einfach alles
+
+\section{Verweisen}
+
+
+Wir verweisen auf Abschnitt [\ref{first label}] auf Seite[\pageref{first label}].
+
+
+
+\end{document}
