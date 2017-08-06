@@ -1,0 +1,31 @@
+\documentclass{scrartcl} 
+\usepackage[T1]{fontenc} 
+\usepackage[utf8]{inputenc} 
+\usepackage[ngerman]{babel} 
+\usepackage{marvosym} 
+%\usepackage{lmodern} 
+\usepackage{parskip}
+\tolerance=2000 
+\setlength{\emergencystretch}{20pt}
+
+\begin{document}
+\newcounter{ReCounter} %!!!!!!%
+\newcounter{Counter}[ReCounter]
+%\stepcounter{ReCounter}
+Unsere Zähler \arabic{Counter} wird auf fünf gesetzt. \\
+\setcounter{Counter}{5}
+Unsere Zähler \arabic{Counter} wird um zehn erhöht.\\
+\addtocounter{Counter}{10}
+Unsere Zähler \arabic{Counter} wird  nun durch die Ausgabe des Rueckstellers ergänzt.\\
+Unsere Zähler \arabic{ReCounter}.\arabic{Counter} wird dutch  erhöehen des Rueckstellers zuruekgesetzt.\\
+\stepcounter{ReCounter}
+Unsere Zähler \arabic{ReCounter}.\arabic{Counter} wird nun um zwanzig erhoeht.\\
+\addtocounter{Counter}{20}
+Unsere Zähler \arabic{ReCounter}.\arabic{Counter} kann auch aners ausgegeben werden.\\
+Unsere Zähler \roman{ReCounter}.\Alph{Counter} sieht dann so aus.\\ 
+
+ 
+
+
+
+\end{document}

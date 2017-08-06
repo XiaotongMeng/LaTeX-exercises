@@ -1,0 +1,42 @@
+\documentclass{scrartcl} 
+\usepackage[T1]{fontenc} 
+\usepackage[utf8]{inputenc} 
+\usepackage[ngerman]{babel} 
+\usepackage{marvosym} 
+%\usepackage{lmodern} 
+\usepackage{parskip}
+\tolerance=2000 
+\setlength{\emergencystretch}{20pt}
+\usepackage{yfonts}
+\usepackage{array}
+
+%\newcommand{\zwei}[2]{\begin{tabular}{|\bfseries #1 |\slshape #2 |}\end{tabular}}    
+%wrong
+
+\newcommand{\zwei}[2]
+{\begin{tabular}{|>{\bfseries}c|>{\itshape}c|}
+ \firsthline
+  #1&#2\\
+ \lasthline
+ \end{tabular}}
+
+
+
+\begin{document}
+\zwei{Adam}{Eva}
+
+
+\newenvironment{tabenv}[1]{\begin{itshape}
+\begin{tabbing}
+\textup{\bfseries #1:} \=\+}
+{\end{tabbing}
+\end{itshape}}
+
+
+\begin{tabenv}{Teilnehmer}
+Person XY\\
+Person YY\\
+Person 	ABC\\
+\end{tabenv}
+
+\end{document}

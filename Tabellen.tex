@@ -1,0 +1,59 @@
+\documentclass{scrartcl} 
+\usepackage[T1]{fontenc} 
+\usepackage[utf8]{inputenc} 
+\usepackage[ngerman]{babel} 
+\usepackage{marvosym} 
+\usepackage{lmodern} 
+\usepackage{parskip}
+\tolerance=2000 
+\setlength{\emergencystretch}{20pt}
+\usepackage{array} %!!!!!%
+\usepackage[bottom]{footmisc}
+
+
+\begin{document}
+\listoftables
+
+\begin{table}[!b]
+\centering
+\begin{tabular}{|c|c|c|}\firsthline
+\multicolumn{3}{|c|}{Ersten Tabelle }\\\hline
+Die&erste&Tabelle \\
+ist&ganz&einfach \\\lasthline
+\end{tabular}
+\caption{Grundsätzliche Formatisierung}
+\end{table}
+
+
+\begin{table}[!b]
+\centering
+\begin{tabular}
+{|>{\itshape}p{1,5cm}|>{\bfseries}m{1,5cm}|b{1,5cm}|}\firsthline
+\multicolumn{3}{|c|}{Zweite Tabelle }\\\hline
+Hier wird der Text vertikal ausgerichtet & 
+Aber auch der Textformatiert & 
+Man beachte auch die Spaltenbreite {1,5cm} \\\lasthline
+\end{tabular}
+\caption{Weitere Ausrichting}
+\end{table}
+
+
+\begin{table}[!b]
+\centering
+\begin{tabular}{|>{\itshape}l||>{\bfseries}c|r|}\firsthline
+\multicolumn{3}{|c|}{Dritte Tabelle }\\\hline\hline
+Hierarbeiten & wir mit & unterschiedlichen\\\cline{1-2}
+vertikal und & horizonslr & Linien \\\cline{2-3} 
+und & horizonalen & Ausrichtungen \\\lasthline
+\end{tabular}
+\caption{Linien und horizonale Ausrichtung}
+\end{table}
+
+
+
+
+
+
+
+
+\end{document}
