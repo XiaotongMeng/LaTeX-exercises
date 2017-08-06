@@ -1,0 +1,47 @@
+\documentclass{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{marvosym}
+\DeclareUnicodeCharacter{20AC}{\EUR}
+
+
+\begin{document}
+
+
+\section*{Zusammenfassung}
+Es folgt ein formatierter Text mit automatischen Inhaltverzeichnis.
+
+
+
+\tableofcontents
+
+\section{Beschreibung}
+\subsection{Aufgabe}
+Mit der Musterpäämbel soll ein neues Doukument  erstellt.Diese Dokument soll mit einer nicht-nummerierten Zusammenfassung beginnen.
+\subsection{Deutscher Text}
+Es muss darauf geachtet werden,dass in der Präambel  alle Einstellung für Deutsche Text eingeführt werden.
+\section{Inhaltsangabe}
+Das Dokumen soll eine automatische INhaltsangabe erthalten,die nach der Zusammenfassung auszugeben ist.
+\section{Unterstrukturen}
+Hier ist die oberste Gliederungsebene für den Artikel.
+\subsection{Nummerierung}
+Die Nummerierung erfolgt automatisch und hierarchisch.
+\subsubsection{Änderung von Nummern}
+Es sind keine mannuellen Änderung der Nummerierung notwendig.Neu eingeschobene Abschinitte werden automatisch korrekt nummeriert.
+\paragraph{Paragraph} Paragraphen werden zwar intern nummeriert,aber in der Standareinstellung werden diese Nummern nicht ausgegeben.Auderdem werden die Paragraphen in der Standardeinstellung auch nischt in das Inhaltverzeichnis geschrieben.
+\subsubsection{Referenzen aud Nummern} 
+\label{mylabel}
+Im Kurs wird gezeigt,wie man auf logische Gliederungsnummern durch Querbezüge
+verweisen kann (siehe unten).
+\section{Formatisierung}
+\subsection[Lange Überschrift]{Auch sehr lange Überschriften können verwendet werden, wobei hier eine Kurzfassung ins Inhaltsverzeichnis geschrieben werden sollte}
+Blicke in das Inhaltsverzeichnis.
+\subsection{Fettdruck}
+Größe und Fettdruck von Überschriften wird automatisch eingestellt.
+\subsection{Abstände}
+Abstände werden ohne weitere Einstellungen automatisch gesetzt.
+\section{Referenzieren}
+Es kann auch auf ein {\itshape label} verwiesen werden. In diesem Fall ist das {\itshape label} in Abschnitt [\ref{mylabel}] auf Seite [\pageref{mylabel}].
+
+\end{document}

@@ -1,0 +1,40 @@
+\documentclass{scrartcl} 
+\usepackage[T1]{fontenc} 
+\usepackage[utf8]{inputenc} 
+\usepackage[ngerman]{babel} 
+\usepackage{marvosym} 
+\usepackage{lmodern} 
+\tolerance=2000 
+\setlength{\emergencystretch}{20pt} 
+\usepackage{pifont}
+\usepackage{pbsi}
+\usepackage{calc}
+\usepackage{yfonts}
+\usepackage{array}
+
+
+\begin{document}
+
+\newenvironment{einkaufsliste}[1]
+{
+  \begin{tabbing}
+  \hspace{3cm}\=\hspace{3cm}\=\hspace{3cm}\=           \kill
+
+  \>\> 1 Teilnehmer\> #1 Teilnehmer\\Einkaufs-\\liste:}
+{\end{tabbing}}
+\newcounter{produkt}
+\newcommand{\liste}[2]{\> #1  \+ \> #2  \+\+ \>\setcounter{produkt}{#2*15}\arabic{produkt} \-\-\- \\
+}
+
+
+\begin{einkaufsliste}{15}
+\liste{Äpfel}{3}
+\liste{Käsebrot}{2}
+\liste{Wurstbrot}{1}
+\liste{Müsliriegel}{2}
+\liste{Wasserflasche}{1}
+\end{einkaufsliste}
+
+
+
+\end{document}

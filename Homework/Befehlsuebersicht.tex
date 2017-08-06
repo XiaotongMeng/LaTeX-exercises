@@ -1,0 +1,1409 @@
+\documentclass{scrartcl} %Dokumentenklasse 
+\usepackage[T1]{fontenc} %Zeichensatzkodierung von 7bit auf 8bit 
+\usepackage[utf8]{inputenc} %Zeichensatzkodierung Unicode bzw. UTF8
+\usepackage[ngerman]{babel} %Silbentrennung nach neuer Rechtschreibung 
+\usepackage{marvosym} %benutzung des Symbol-Pakets marvosym
+\usepackage{parskip} %neue Absätze werden nicht zusätzlich eingerückt
+\usepackage{lmodern} %verwenden von Vektorschriftarten
+\tolerance=2000 
+\setlength{\emergencystretch}{20pt} %verhindert das herrausragen von Wörtern übers Zeilenende
+\usepackage{multicol} %Mehrspaltensatz
+\usepackage[pdftex]{graphicx} %erlaubt das einbinden externer Graphiken
+\usepackage[svgnames,table,hyperref]{xcolor} %bietet viele weitere Farboptionen
+\usepackage{array} %Erweiterte Tabellenformatierung
+\usepackage{calc} %erlaubt einfache Rechenoperationen
+\usepackage{amsmath} %basispaket für AMS-LaTeX
+\usepackage[intlimits]{empheq} %erweitert amsmath
+\usepackage{amssymb,mathrsfs} %Zusatzzeichen
+\usepackage{theorem} %Theoremlayout
+\usepackage{pifont} %Symbole
+%\usepackage{suetterl} %Sütterlinschrift
+\usepackage{pbsi} %Schönschrift
+\usepackage{yfonts} %Altdeutsche Schrift
+\usepackage{wrapfig} %Erlaubt das einbetten von Abbildungen in Text
+\usepackage{subfig} %Wird für zusammengesetzte Abbildungen benötigt
+\usepackage[bookmarks,raiselinks,pageanchor,hyperindex,colorlinks,citecolor=black,linkcolor=black,urlcolor=black,filecolor=black,menucolor=black]{hyperref} %Bookmarks und umdefinieren einiger farblicher Hervorhebungen
+\begin{document}
+\title{Befehlsübersicht für den Kurs Textverarbeitung mit \LaTeX \\{\footnotesize Creative Commons: BY-NC-SA 3.0}}
+\author{Timo Freyer \and Felix Brecklinghaus}
+\date{\today}
+\maketitle
+\tableofcontents
+\listoftables
+\listoffigures
+\newpage
+\stepcounter{section}
+\section{Strukturierung eines Dokuments}
+\subsection{Aufbau eines Dokuments}
+\begin{verbatim}
+~Präambel~
+\begin {document}
+Hier steht der Text
+\end {document}
+\end{verbatim} 
+\subsection{Dokumentklassen}
+\begin{verbatim}\documentclass[option]{Klassenname}\end{verbatim}
+Übersicht über die Dokumentklassen siehe Tabelle \ref{dokkl} auf Seite \pageref{dokkl}
+\begin{table}
+\centering
+\begin{tabular}{|>{\columncolor{lightgray}}ll|}
+\firsthline\rowcolor{gray}\textcolor{White}{Klassenname} & \textcolor{White}{Zielsetzung} \\
+book & Bücher; Kapitelgliederung\\ 
+report & Längere Berichte; Kapitelgliederung\\ 
+article & Kürzerer Bericht; Abschnitsgliederung\\ 
+letter & Brief (amerikanische vorgaben)\\
+\multicolumn{2}{|>{\columncolor{gray}}c|}{KOMA-Script}\\
+scrbook & Europäische Variante von book\\ 
+scrreprt & Europäische Variante von report\\ 
+scrartcl & Europäische Variante von article\\ 
+scrlttr2 & Europäische Variante von letter\\ 
+\lasthline
+\end{tabular}
+\caption{Übersicht über einige Dokumentklassen}
+\label{dokkl}
+\end{table}
+\subsection{Pakete}
+\subsubsection{Verwendung}
+\begin{verbatim}
+\usepackage[option]{Paketname(n)}
+\end{verbatim}
+\subsubsection{Pakete für deutschen Text (UTF-8)}
+\begin{verbatim} 
+\usepackage[T1]{fontenc}	
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{marvosym}
+\DeclareUnicodeCharacter{20AC}{\EUR}
+\end{verbatim}
+\subsubsection{Deutsches Absatzlayout}
+\begin{verbatim}
+\usepackage{parskip}
+\end{verbatim}
+Bei KOMA-Script-Dokumentklassen (siehe Tabelle \ref{dokkl} auf Seite \pageref{dokkl}) auch möglich:
+\begin{verbatim}
+\documentclass[parskip]{scr...}
+\end{verbatim}
+\subsection{Logische Gliederung}
+\subsubsection{Gliederung}
+\begin{description}
+\item\begin{verbatim}\section{Gliederungsebene mit Nummerierung}\end{verbatim}
+\item\begin{verbatim}\subsection*{Gliederungsebene ohne Nummerierung & ohne Inhaltsverzeichniseintrag}\end{verbatim}
+\item\begin{verbatim}\subsubsection[kurztitel]{Gliederungsebene mit Nummerierung & Kurztitel}\end{verbatim}
+\item\begin{verbatim}\paragraph{Gliederungsebene standardmäßig ohne Nummerierung}\end{verbatim}
+\item\begin{verbatim}\subparagraph{Gliederungsebene standardmäßig ohne Nummerierung}\end{verbatim}
+\item Nur bei KOMA-Script-Dokumentklassen (siehe Tabelle \ref{dokkl} auf Seite \pageref{dokkl}):
+\item\begin{verbatim}\addsec{Gliederungsebene ohne Nummerierung & mit Inhaltsverzeichniseintrag}\end{verbatim}
+\end{description}
+\subsubsection{Inhaltsverzeichnis}
+\begin{verbatim}\tableofcontents\end{verbatim}
+\subsubsection{Titel}
+\paragraph{Festlegen des Titelinhalts}
+\begin{verbatim}
+~Präambel~
+\title{Titel des Dokuments}
+\author{Name des Autors \and weiterer Autor}
+\date{Datum}
+\end{verbatim}
+\paragraph{Ausgabe des Titels}
+\begin{verbatim}\maketitle\end{verbatim}
+\subsubsection{Querbezüge}
+\paragraph{Markierung setzen}
+\begin{verbatim}
+\label{Eindeutiger Labelname}
+\end{verbatim}
+\subsubsection*{Auf Markierung verweisen}
+Überschriftennummer vor Markierung ausgeben
+\begin{verbatim}
+\ref{Eindeutiger Labelname}
+\end{verbatim}
+Seitenzahl von Markierung ausgeben
+\begin{verbatim}
+\pageref{Eindeutiger Labelname}
+\end{verbatim}
+\paragraph{Pakete}
+\begin{verbatim}\usepackage{nameref}
+\end{verbatim}
+Name der Überschrift vor Markierung ausgeben
+\begin{verbatim}
+\nameref{Eindeutiger Labelname}
+\end{verbatim}
+\pagebreak
+\subsection{Absätze und Umbrüche}
+\subsubsection{Trennung von Seiten}
+\textbf{Mit angepassten Abständen (nach Absatz):}
+\begin{verbatim}
+\pagebreak[Priorität]
+\nopagebreak[Priorität]
+\end{verbatim}
+Priorität: 0 (schwach) bis 4 (zwingend)\par\medskip
+\textbf{Ohne angepasste Abstände:}
+\begin{verbatim}
+\newpage
+\clearpage
+\cleardoublepage
+\end{verbatim}
+\subsubsection{Trennung von Absätzen}
+\begin{tabbing}
+\hspace{2cm}\=\kill
+\verb+\par+\>\verb+\smallskip+\\
+\>\verb+\medskip+\\
+\>\verb+\bigskip+\\
+\end{tabbing}
+\begin{verbatim}
+\vspace{Längenmaß}
+\vspace*{Längenmaß} auch über den Seitenwechsel
+\end{verbatim}
+\subsubsection{Trennung von Zeilen}
+Priorität: 0 (schwach) bis 4 (zwingend)\par\medskip
+\textbf{Mit angepassten Abständen:}
+\begin{verbatim}
+\linebreak[Priorität] 
+\nolinebreak[Priorität]
+\end{verbatim}
+\textbf{Ohne angepasste Abstände:}
+\begin{verbatim} 
+\newline
+\\[Längenmaß]
+\end{verbatim}
+\pagebreak
+\subsubsection{Trennung von Wörtern}
+Übersicht über verschiedene horizontale Abstände in Tabelle \ref{habst} auf Seite \pageref{habst}
+\begin{verbatim}
+\hspace{Längenmaß}
+\hspace*{Längenmaß} auch über den Zeilenwechsel
+\end{verbatim}
+
+\begin{table}
+\centering
+\begin{tabular}{|>{\columncolor{lightgray}}ll>{\columncolor{lightgray}}c|}
+\firsthline\rowcolor{gray}\textcolor{white}{Kurzbefehl}&\textcolor{White}{Befehl}&\textcolor{white}{Paket}\\
+&\verb+\quad+& \\
+&\verb+\qquad+&\\
+\multicolumn{3}{|c|}{\cellcolor{gray}Abstand kleiner als Leerzeichen}\\
+\verb+\,+&\verb+\thinspace+&\\
+\verb+\:+&\verb+\medspace+&amsmath\\
+\verb+\;+&\verb+\thickspace+&amsmath\\
+\multicolumn{3}{|c|}{\cellcolor{gray}negativer Abstand}\\
+\verb+\!+&\verb+\negthinspace+&amsmath (für Kurzbefehl)\\
+&\verb+\negmedspace+&amsmath\\
+&\verb+\negthickspace+&amsmath\\
+\lasthline
+\end{tabular}
+\caption{Übersicht über horizontale Abstände}
+\label{habst}
+\end{table}
+
+\subsection{Sonderzeichen und Symbole}
+\subsubsection{Anführungszeichen}
+Verwendung von Anführungszeichen siehe Tabelle \ref{anfz} auf Seite \pageref{anfz}
+\begin{table}
+\centering
+\begin{tabular}{|>{\columncolor{lightgray}}ll>{\columncolor{lightgray}}ll|}
+\firsthline\rowcolor{gray}\textcolor{white}{Zeichen}&\textcolor{White}{Eingabe}&\textcolor{white}{Zeichen} & \textcolor{White}{Eingabe}\\
+\flq & \verb+\flq+ & \frq & \verb+\frq+\\
+\glq & \verb+\glq+ & \grq & \verb+\grq+\\
+\dq & \verb+\dq+ & &\\
+\flqq & \verb+\flqq+ & \frqq & \verb+\frqq+\\
+\glqq & \verb+\glqq+ & \grqq & \verb+\grqq+\\
+\lasthline
+\end{tabular}
+\caption{Übersicht von Anführungszeichen}
+\label{anfz}
+\end{table}
+\subsection{Verwalten großer Dokumente}
+Andere .tex Datei einbinden
+\begin{verbatim}\input{Tex-Datei.tex}\end{verbatim}
+.tex Datei in Unterordner einbinden (relativer Pfad)
+\begin{verbatim}\input{Unterordner/Tex-Datei.tex}\end{verbatim}
+\section{Schriften}
+\stepcounter{subsection}
+\subsection{Schriftfamilie}
+\textrm{Serifenschriftart:} \begin{verbatim}\textrm{Text} {\rmfamily Text}\end{verbatim}
+\pagebreak
+\textsf{Serifenlos:} \begin{verbatim}\textsf{Text} {\sffamily Text}\end{verbatim}
+\texttt{Monospace:} \begin{verbatim}\texttt{Text} {\ttfamily Text}\end{verbatim}
+\subsection{Schriftstärke}
+\textbf{Fett:} \begin{verbatim}\textbf{Text} {\bfseries Text}\end{verbatim}
+\textmd{Normal:} \begin{verbatim}\textmd{Text} {\mdseries Text}\end{verbatim}
+\subsection{Schriftform}
+\textit{Kursiv:} \begin{verbatim}\textit{Text} {\itshape Text}\end{verbatim}
+\textsl{Schräg:} \begin{verbatim}\textsl{Text} {\slshape Text}\end{verbatim}
+\textsc{Kapitälchen:} \begin{verbatim}\textsc{Text} {\scshape Text}\end{verbatim}
+\emph{Hervorheben:} \begin{verbatim}\emph{Text}\end{verbatim}
+\textup{Aufrecht:} \begin{verbatim}\textup{Text} {\upshape Text}\end{verbatim}
+\subsection{Schriftgröße}
+Verwendung von Schriftgrößen siehe Tabelle \ref{schrg} auf Seite \pageref{schrg}
+\begin{table}
+
+\centering
+\begin{tabular}{|>{\columncolor{lightgray}}llll|}
+\firsthline\rowcolor{gray}\textcolor{white}{Befehl}&\textcolor{White}{10pt}&\textcolor{white}{11pt} & \textcolor{White}{12pt}\\
+\verb+\tiny+ & 5pt & 6pt & 6pt\\
+\verb+\scriptsize+	& 7pt & 8pt & 8pt\\
+\verb+\footnotesize+ & 8pt & 9pt & 10pt\\
+\verb+\small+ & 9pt & 10pt & 11pt\\
+\verb+\normalsize+ & 10pt & 11pt & 12pt\\
+\verb+\large+ & 12pt & 12pt & 14pt\\
+\verb+\Large+ & 14pt & 14pt & 17pt\\
+\verb+\LARGE+ & 17pt & 17pt & 20pt\\
+\verb+\huge+ & 20pt & 20pt & 25pt\\
+\verb+\Huge+ & 25pt & 25pt & 25pt\\
+\lasthline
+\end{tabular}
+\caption{Übersicht der Schriftgrößen}
+\label{schrg}
+\end{table}
+\subsection{Schriftart ersetzen}
+\begin{verbatim}\usepackage{Schriftart1,Schriftart2,...}\end{verbatim}
+Verwendung von PostScript-Schriften siehe Tabelle \ref{schrers} auf Seite \pageref{schrers}
+\begin{table}
+\centering
+\begin{tabular}{|>{\columncolor{lightgray}}lllll|}
+\firsthline\rowcolor{gray}\textcolor{white}{Paket}&\textcolor{White}{\textbackslash{}textrm}&\textcolor{white}{\textbackslash{}textsf} & \textcolor{White}{\textbackslash{}texttt} & \textcolor{White}{\textbackslash{}Mathematik}\\
+mathpazo & Palatino	& & & Palatino\\
+mathptmx & Times & & & Times\\
+helvet & & Helvetica & &\\	
+avant & & Avant Garde & &\\
+courier & & & Courier &\\
+chancery & Zapf Chancery & & &\\
+bookman & Bookman & Avant Garde	& Courier &\\
+newcent & New Century Schoolbook & Avant Garde & Courier &\\
+charter & Bitstream Charter & & &\\
+\lasthline
+\end{tabular}
+\caption{Verwendung von PostScript-Schriften}
+\label{schrers}
+\end{table}
+\pagebreak
+\subsection{Zusätzliche Schriften}
+\subsubsection{Symbole}
+\paragraph{Pakete}
+\begin{verbatim}\usepackage{pifont}\end{verbatim}
+\paragraph{Verwendung}
+\begin{verbatim}\ding{Nummer}\end{verbatim}
+Die Nummern der einzelnen Symole sind in Tabelle \ref{dingsym} auf Seite \pageref{dingsym} zusammengefasst
+\begin{table}
+\centering
+\begin{tabular}{|>{\columncolor{lightgray}}cc>{\columncolor{lightgray}}cc>{\columncolor{lightgray}}cc>{\columncolor{lightgray}}cc>{\columncolor{lightgray}}cc>{\columncolor{lightgray}}cc>{\columncolor{lightgray}}cc>{\columncolor{lightgray}}cc|}
+\firsthline
+32 &  \ding{32} & 33 &  \ding{33} & 34 &  \ding{34} & 35 &  \ding{35} & 36 &  \ding{36} & 37 &  \ding{37} & 38 &  \ding{38} & 39 &  \ding{39}  \\
+40 &  \ding{40} & 41 &  \ding{41} & 42 &  \ding{42} & 43 &  \ding{43} & 44 &  \ding{44} & 45 &  \ding{45} & 46 &  \ding{46} & 47 &  \ding{47}  \\
+48 &  \ding{48} & 49 &  \ding{49} & 50 &  \ding{50} & 51 &  \ding{51} & 52 &  \ding{52} & 53 &  \ding{53} & 54 &  \ding{54} & 55 &  \ding{55}  \\
+56 &  \ding{56} & 57 &  \ding{57} & 58 &  \ding{58} & 59 &  \ding{59} & 60 &  \ding{60} & 61 &  \ding{61} & 62 &  \ding{62} & 63 &  \ding{63}  \\
+64 &  \ding{64} & 65 &  \ding{65} & 66 &  \ding{66} & 67 &  \ding{67} & 68 &  \ding{68} & 69 &  \ding{69} & 70 &  \ding{70} & 71 &  \ding{71}  \\
+72 &  \ding{72} & 73 &  \ding{73} & 74 &  \ding{74} & 75 &  \ding{75} & 76 &  \ding{76} & 77 &  \ding{77} & 78 &  \ding{78} & 79 &  \ding{79}  \\
+80 &  \ding{80} & 81 &  \ding{81} & 82 &  \ding{82} & 83 &  \ding{83} & 84 &  \ding{84} & 85 &  \ding{85} & 86 &  \ding{86} & 87 &  \ding{87}  \\
+88 &  \ding{88} & 89 &  \ding{89} & 90 &  \ding{90} & 91 &  \ding{91} & 92 &  \ding{92} & 93 &  \ding{93} & 94 &  \ding{94} & 95 &  \ding{95}  \\
+96 &  \ding{96} & 97 &  \ding{97} & 98 &  \ding{98} & 99 &  \ding{99} & 100 &  \ding{100} & 101 &  \ding{101} & 102 &  \ding{102} & 103 &  \ding{103}  \\
+104 &  \ding{104} & 105 &  \ding{105} & 106 &  \ding{106} & 107 &  \ding{107} & 108 &  \ding{108} & 109 &  \ding{109} & 110 &  \ding{110} & 111 &  \ding{111}  \\
+112 &  \ding{112} & 113 &  \ding{113} & 114 &  \ding{114} & 115 &  \ding{115} & 116 &  \ding{116} & 117 &  \ding{117} & 118 &  \ding{118} & 119 &  \ding{119}  \\
+120 &  \ding{120} & 121 &  \ding{121} & 122 &  \ding{122} & 123 &  \ding{123} & 124 &  \ding{124} & 125 &  \ding{125} & 126 &  \ding{126} &     &              \\
+    &             & 161 &  \ding{161} & 162 &  \ding{162} & 163 &  \ding{163} & 164 &  \ding{164} & 165 &  \ding{165} & 166 &  \ding{166} & 167 &  \ding{167}  \\
+168 &  \ding{168} & 169 &  \ding{169} & 170 &  \ding{170} & 171 &  \ding{171} & 172 &  \ding{172} & 173 &  \ding{173} & 174 &  \ding{174} & 175 &  \ding{175}  \\
+176 &  \ding{176} & 177 &  \ding{177} & 178 &  \ding{178} & 179 &  \ding{179} & 180 &  \ding{180} & 181 &  \ding{181} & 182 &  \ding{182} & 183 &  \ding{183}  \\
+184 &  \ding{184} & 185 &  \ding{185} & 186 &  \ding{186} & 187 &  \ding{187} & 188 &  \ding{188} & 189 &  \ding{189} & 190 &  \ding{190} & 191 &  \ding{191}  \\
+192 &  \ding{192} & 193 &  \ding{193} & 194 &  \ding{194} & 195 &  \ding{195} & 196 &  \ding{196} & 197 &  \ding{197} & 198 &  \ding{198} & 199 &  \ding{199}  \\
+200 &  \ding{200} & 201 &  \ding{201} & 202 &  \ding{202} & 203 &  \ding{203} & 204 &  \ding{204} & 205 &  \ding{205} & 206 &  \ding{206} & 207 &  \ding{207}  \\
+208 &  \ding{208} & 209 &  \ding{209} & 210 &  \ding{210} & 211 &  \ding{211} & 212 &  \ding{212} & 213 &  \ding{213} & 214 &  \ding{214} & 215 &  \ding{215}  \\
+216 &  \ding{216} & 217 &  \ding{217} & 218 &  \ding{218} & 219 &  \ding{219} & 220 &  \ding{220} & 221 &  \ding{221} & 222 &  \ding{222} & 223 &  \ding{223}  \\
+224 &  \ding{224} & 225 &  \ding{225} & 226 &  \ding{226} & 227 &  \ding{227} & 228 &  \ding{228} & 229 &  \ding{229} & 230 &  \ding{230} & 231 &  \ding{231}  \\ 
+232 &  \ding{232} & 233 &  \ding{233} & 234 &  \ding{234} & 235 &  \ding{235} & 236 &  \ding{236} & 237 &  \ding{237} & 238 &  \ding{238} & 239 &  \ding{239}  \\
+    &             & 241 &  \ding{241} & 242 &  \ding{242} & 243 &  \ding{243} & 244 &  \ding{244} & 245 &  \ding{245} & 246 &  \ding{246} & 247 &  \ding{247}  \\
+248 &  \ding{248} & 249 &  \ding{249} & 250 &  \ding{250} & 251 &  \ding{251} & 252 &  \ding{252} & 253 &  \ding{253} & 254 &  \ding{254} & &\\ 
+\lasthline
+\end{tabular}
+\caption{Symbole der pifont Symbolsammlung}
+\label{dingsym}
+\end{table}
+\subsubsection{Schönschrift}
+\paragraph{Pakete}
+\begin{verbatim}\usepackage{pbsi}\end{verbatim}
+\paragraph{Verwendung}
+\begin{verbatim}{\bsifamily Text}\end{verbatim}
+%\begin{verbatim}\textcalligra{Text}\end{verbatim}
+\paragraph{Beispiel}
+{\bsifamily Lorem ipsum dolor sit amet}
+%\subsubsection{Suetterling}
+%\paragraph{Pakete}
+%\begin{verbatim}\usepackage{suetterl}\end{verbatim}
+%\paragraph{Verwendung}
+%\begin{verbatim}{\suetterlin Text}\end{verbatim}
+%\begin{verbatim}\textsuetterlin{Text}\end{verbatim}
+%\paragraph{Beispiel}
+%{\suetterlin Lorem ipsum dolor sit amet}
+\section{Formatierung von Text}
+\subsection{Textausrichtung}
+\subsubsection{Umgebungsvariante:}\par\medskip
+Zentriert:
+\begin{verbatim}\begin{center} Text \end{center}\end{verbatim}
+Linksbündig:
+\begin{verbatim}\begin{flushleft} Text \end{flushleft}\end{verbatim}
+Rechtsbündig:
+\begin{verbatim}\begin{flushright} Text \end {flushright}\end{verbatim}
+\pagebreak
+\subsubsection{Parameterloser Befehl}\par\medskip
+Zentriert:
+\begin{verbatim}{\centering Text \\}\end{verbatim}
+Linksbündig:
+\begin{verbatim}{\raggedright Text \\}\end{verbatim}
+Rechtsbündig:
+\begin{verbatim}{\raggedleft Text \\}\end{verbatim}
+\subsection{Texte einrücken}
+\subsubsection{Normal}
+\begin{verbatim}\begin{quote} Text \end{quote}\end{verbatim}
+\begin{quote}Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.\end{quote}
+\subsubsection{Erste Zeile eingerückt:}
+\begin{verbatim}\begin{quotation} Text \end{quotation}\end{verbatim}
+\begin{quotation}Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.\end{quotation}
+\subsubsection{Verse}
+\begin{verbatim}\begin{verse} Vers1\\ Vers2\\ \end{verse}\end{verbatim}
+\begin{verse}
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua\\ 
+At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.\\ 
+\end{verse}
+\subsection{Listen}
+\subsubsection{Die Umgebungen}
+Aufzählung Listenmarker:	
+\begin{verbatim}\begin{itemize}…\end{itemize}\end{verbatim}
+Nummerierte Liste:	
+\begin{verbatim}\begin{enumerate}…\end{enumerate}\end{verbatim}
+Aufzählung mit Markierungsworten:
+\begin{verbatim}\begin{description }…\end{description}\end{verbatim}
+Marke:	
+\begin{verbatim}\item[Marke]\end{verbatim}
+\paragraph{Beispiel}
+\subparagraph{Quelltext}
+\begin{verbatim}
+\begin{itemize}
+\item Erste Einrückung, Liste
+\begin{enumerate}
+\item Zweite Einrückung, Aufzählung
+\end{enumerate}
+\end{itemize}
+\end{verbatim}
+\subparagraph{Ausgabe}
+\begin{itemize}
+\item Erste Einrückung, Liste
+\begin{enumerate}
+\item Zweite Einrückung, Aufzählung
+\end{enumerate}
+\end{itemize}
+\subsection{Fußnoten}
+\begin{verbatim}\footnote{Inhalt der Fußnote}\end{verbatim}
+\subsection{Randbemerkungen}
+\begin{verbatim}\marginpar[Linker Text]{Rechter Text}\end{verbatim}
+\subsection{Tabulatoren}
+\subsubsection{Umgebung}
+\begin{verbatim}\begin{tabbing}…\end{tabbing}\end{verbatim}
+\subsubsection{Allgemeine Befehle}
+\begin{tabbing}
+\hspace{3cm}\=\kill
+Tabulatorstopp:\>\verb+\=+\\
+Sprung\>\verb+\>+\\
+Umbruch\>\verb+\\+\\
+\end{tabbing}
+\paragraph{Beispiel}
+\subparagraph{Quelltext}
+\begin{verbatim}
+\begin{tabbing}
+Hier wird ein Tabstopp gesetzt:\= \\
+\> erste Zeile \\
+\> zweite Zeile \\
+\end{tabbing}
+\end{verbatim}
+\subparagraph{Ausgabe}
+\begin{tabbing}
+Hier wird ein Tabstopp gesetzt:\= \\
+\> erste Zeile \\
+\> zweite Zeile \\
+\end{tabbing}
+\pagebreak
+\subsubsection{Abstände}
+\begin{verbatim}\hspace{}\=\hspace{}\=\kill\end{verbatim}
+\paragraph{Beispiel}
+\subparagraph{Quelltext}
+\begin{verbatim}
+\begin{tabbing}
+\hspace{2cm}\=\hspace{5cm}\=\kill
+2cm Platz\>5cm Platz\>Ende
+\end{tabbing} 
+\end{verbatim}
+\subparagraph{Ausgabe}
+\begin{tabbing}
+\hspace{2cm}\=\hspace{5cm}\=\kill
+2cm Platz\>5cm Platz\>Ende
+\end{tabbing}
+\subsubsection{Ersten Tabstopp definieren}
+\begin{tabbing}
+\hspace{3.5cm}\=\hspace{1cm}\=\hspace{1cm}\=\\
+Dauerhafter Sprung:\>\textbackslash{}+\>bzw.\>\textbackslash{}+\textbackslash{}+\\
+Sprung Zurück:\>\textbackslash{}-\>bzw.\>\textbackslash{}-\textbackslash{}-\\
+Lokaler Rücksprung:\>\textbackslash{}<\\
+\end{tabbing}
+\paragraph{Beispiel}
+\subparagraph{Quelltext}
+\begin{verbatim}
+\begin{tabbing}
+Hier wird ein Tabstopp gesetzt:\= \+ \\
+erste Zeile \\
+zweite Zeile \\
+\end{tabbing} 
+\end{verbatim}
+\pagebreak
+\subparagraph{Ausgabe}
+\begin{tabbing}
+Hier wird ein Tabstopp gesetzt:\= \+ \\
+erste Zeile \\
+zweite Zeile \\
+\end{tabbing}
+\subsubsection{Ausrichtung}
+Linker Text rechtsbündig zum aktuellen Tabstopp:
+\begin{verbatim}Linker Text \' Rechter Text\end{verbatim}
+Letzter Text der Zeile rechtsbündig:
+\begin{verbatim}Linker Text\`Rechter Text\end{verbatim}
+\paragraph{Beispiel}
+\subparagraph{Quelltext}
+\begin{verbatim}
+\begin{tabbing}
+Hier soll ein Tabstopp sein \=\\
+\>Linker Text\' Rechter Text\\
+\`Rechter Text
+\end{tabbing} 
+\end{verbatim}
+\subparagraph{Ausgabe}
+\begin{tabbing}
+Hier soll ein Tabstopp sein \=\\
+\>Linker Text\' Rechter Text\\
+\`Rechter Text
+\end{tabbing}
+\section{Tabellen}
+\paragraph{Pakete}
+\begin{verbatim}\usepackage{array}\end{verbatim}
+\subsection{Formatierung}
+\subsubsection{Umgebung}
+\begin{verbatim}\begin{tabular}[Position]{Format}Tabelleninhalt\end{tabular}\end{verbatim}
+\subsubsection{Position (Tabellenausrichtung)}
+\begin{tabbing}
+Ausrichtung erste Zeile mit Umgebung:\hspace{5mm}\=\kill
+Ausrichtung erste Zeile mit Umgebung:\>{\verb+t+}\\
+Ausrichtung letzte Zeile mit Umgebung:\>{\verb+b+}\\
+Ausrichtung mittig mit Umgebung:\>\textit{keiner}\\
+\end{tabbing}
+\subsubsection{Format (Zellenausrichtung)}
+\begin{tabbing}
+\hspace{0.75cm}\=\hspace{2.75cm}\=\hspace{2.25cm}\=\kill
+Horizontal:\>\>Vertikal:\\\par
+{\verb+l+}\>linksbündig\>{\verb+p{breite}+}\>unten\\
+{\verb+c+}\>zentriert\>{\verb+m{breite}+}\>mittig\\
+{\verb+r+}\>rechtsbündig\>{\verb+b{breite}+}\>oben\\
+\end{tabbing}
+\subsubsection{Spalten zusammenfassen}
+\begin{verbatim}\multicolumn{Anzahl Zusammenzufassender Zeilen}{format}{Text} \end{verbatim}
+\subsubsection{Tabellen festlegen}
+\begin{tabbing}
+\hspace{2.5cm}\=\kill
+Spalten:\>{\verb+{FormatFormatFormat}+}\\
+Zeile:\>{\verb+Spalte1 & Spalte2 & Spalte3+}\\
+\end{tabbing}
+\subsubsection{Schriftformatierung}
+\begin{tabbing}
+\hspace{2cm}\=\kill
+Zeile:\>{\verb+format>{\Schriftformatierung}formatformat+}
+\end{tabbing}
+\pagebreak
+\paragraph{Beispiel a)}
+\subparagraph{Quelltext}
+\begin{verbatim}
+\begin{tabular}{>{\itshape}l>{\bfseries}cr|}
+A1 & A2 & A3\\
+B1 & B2 & B3\\
+\multicolumn{3}{c}{Dies ist Zelle C}\\
+\end{verbatim}
+\subparagraph{Ausgabe}
+\hfill \\ \hfill \\
+\begin{tabular}{>{\itshape}l>{\bfseries}cr}
+A1 & A2 & A3\\
+B1 & B2 & B3\\
+\multicolumn{3}{c}{Dies ist Zelle C}\\
+\end{tabular}
+\par\bigskip
+\paragraph{Beispiel b)}
+\subparagraph{Quelltext}
+\begin{verbatim}
+\begin{tabular} {p{2cm}m{2cm}b{2cm}} 
+Das ist die erste umgebrochene Spalte & 
+Das ist die zweite umgebrochene Spalte & 
+Und das die dritte umgebrochene Spalte
+\end{tabular}
+\end{verbatim}
+\subparagraph{Ausgabe}
+\hfill \\ \hfill \\
+\begin{tabular} {p{2cm}m{2cm}b{2cm}} 
+Das ist die erste umgebrochene Spalte & 
+Das ist die zweite umgebrochene Spalte & 
+Und das die dritte umgebrochene Spalte
+\end{tabular}
+\pagebreak
+\subsection{Trennlinien}
+\begin{tabbing}
+\hspace{0.2cm}\=\hspace{1.5cm}\=\hspace{2.5cm}\=\hspace{1.75cm}\=\kill
+Vertikal:\\
+\>Spalten:\>{\verb+{Format|Format||Format}+}\\
+Horizontal:\\
+\>Erste: \>{\verb+\firsthline+}\>	normal:\> {\verb+\hline+}\\
+\>letzte: \>{\verb+\lasthline+}\>	auswahl:\> {\verb+\cline{i-j}+}\\
+\end{tabbing}
+\paragraph{Beispiel}
+\subparagraph{Quelltext}
+\begin{verbatim}
+\begin{tabular}{|>{\itshape}c|c|c|}\firsthline
+A1 & A2 & A3\\\hline
+B1 & B2 & B3\\\cline{2-3}
+C1 & C2 & C3\\\lasthline
+\end{verbatim}
+\subparagraph{Ausgabe}
+\hfill \\ \hfill \\
+\begin{tabular}{|>{\itshape}c|c|c|}\firsthline
+A1 & A2 & A3\\\hline
+B1 & B2 & B3\\\cline{2-3}
+C1 & C2 & C3\\\lasthline
+\end{tabular}
+\\
+\subsection{Gleitobjekte}
+\subsubsection{Umgebung} \begin{verbatim}\begin{table}[optionen]…\end{table}\end{verbatim}
+Optionen für das setzen von Gleitobjekte siehe Tabelle \ref{gleitaus} auf Seite \pageref{gleitaus}. Die Syntax ist folgende: \begin{verbatim}\begin{table}[!htb]\end{table}\end{verbatim}
+\begin{table}
+\centering
+\begin{tabular}{|>{\columncolor{lightgray}}ll|}
+\firsthline\rowcolor{gray}\textcolor{White}{Option} & \textcolor{White}{Bedeutung} \\
+h & Versucht an genau der Stelle zu plazieren\\ 
+t & Versucht am Seitenkopf zu plazieren\\ 
+b & Versucht am Seitenende zu plazieren\\ 
+p & Versucht auf eigene Seite zu plazieren\\
+! & Erhöht warscheinlichkeit\\
+\lasthline
+\end{tabular}
+\caption{Optionen für das setzen von Gleitobjekten}
+\label{gleitaus}
+\end{table}
+\subsubsection{Beschriftung (innerhalb der Table Umgebung)}
+\begin{verbatim}\caption[Kurztext]{Beschreibungstext}\end{verbatim}
+\subsubsection{Tabellenverzeichnis}
+\begin{verbatim}\listoftables \end{verbatim}
+\section{Definition eigener Strukturen}
+\subsection{Zähler}
+\subsubsection{Erstellen eigener Zähler}
+\begin{verbatim}\newcounter{Zähler}[Rücksteller]\end{verbatim}
+\subsubsection{Manipulation von Zählern}
+Zähler auf Wert setzen:
+\begin{verbatim}\setcounter{Zähler}{Wert}\end{verbatim}
+Zähler um Wert erhöhen:
+\begin{verbatim}\addtocounter{Zähler}{Wert}\end{verbatim}
+Zähler um 1 erhöhen (alle abhängigen auf 0):
+\begin{verbatim}\stepcounter{Zähler bzw. Rücksteller}\end{verbatim}
+\subsubsection{Ausgabe von Zählern}
+Die Ausgabemöglichkeiten der einzelnen Zähler sind in Tabelle \ref{zaeausg} auf Seite \pageref{zaeausg} zusammengefasst
+\begin{table}
+\centering
+\begin{tabular}{|>{\columncolor{lightgray}}llll|}
+\firsthline\rowcolor{gray}\textcolor{white}{Befehl}&\textcolor{White}{Bsp}&\textcolor{white}{Zahlenwert}& \textcolor{White}{Erklärung}\\
+\textbackslash{}arabic\{Zähler\} & 6 & & Arabische Zahlen\\
+\textbackslash{}roman\{Zähler\} & vi & (>0) & Kleine römische Zahlen\\
+\textbackslash{}Roman\{Zähler\} & VI & (>0) & Große römische Zahlen\\
+\textbackslash{}alph\{Zähler\} & f & (1,...,26) & Kleine Buchstaben\\
+\textbackslash{}Alph\{Zähler\} & F & (1,...,26) & Große Buchstaben\\
+\textbackslash{}fnsymbol\{Zähler\} & II & (1,...,9) & Fußnotensymbol\\
+\lasthline
+\end{tabular}
+\caption{Übersicht der Ausgabearten von Zählern}
+\label{zaeausg}
+\end{table}
+\subsubsection{Referenzen auf Zähler}
+Zählerwert merken (bezieht sich auf Wert nach letzem \textbackslash refstepcounter):
+\begin{verbatim}\refstepcounter{Zähler}\label{ZählerLabel}\end{verbatim}
+Ausgabe durch:
+\begin{verbatim}\ref{ZählerLabel}\end{verbatim}
+Interner Verweis (wird nicht ausgegeben):
+\begin{verbatim}\value{ZählerLabel}\end{verbatim}
+\paragraph{Beispiel}
+\subparagraph{Quelltext}
+\begin{verbatim}
+\newcounter{Ruecksteller}
+\newcounter{Zaehler}[Ruecksteller]
+a) Zaehler: \arabic{Zaehler}\\
+\setcounter{Zaehler}{2}
+b) Zaehler: \arabic{Zaehler}\\ 
+\addtocounter{Zaehler}{3}
+c) Zaehler: \arabic{Zaehler}\\ 
+d) Zaehler: \arabic{Ruecksteller}.\arabic{Zaehler}\\
+\stepcounter{Ruecksteller}
+e) Zaehler: \arabic{Ruecksteller}.\arabic{Zaehler}\\
+\refstepcounter{Zaehler}\label{Zaehler} 
+f) Zaehler: \arabic{Ruecksteller}.\arabic{Zaehler}\\ 
+\addtocounter{Zaehler}{4}
+g) Zaehler: \arabic{Ruecksteller}.\arabic{Zaehler}\\ 
+h) Zaehler: \roman{Ruecksteller}.\Alph{Zaehler}\\
+Auf den Zaehler \ref{Zaehler} von Seite 
+\pageref{Zaehler} kann ich sogar verweisen.\\
+\end{verbatim}
+\subparagraph{Ausgabe}
+\hfill \\ \hfill \\
+\newcounter{Ruecksteller}
+\newcounter{Zaehler}[Ruecksteller]
+a) Zaehler: \arabic{Zaehler}\\
+\setcounter{Zaehler}{2}
+b) Zaehler: \arabic{Zaehler}\\ 
+\addtocounter{Zaehler}{3}
+c) Zaehler: \arabic{Zaehler}\\ 
+d) Zaehler: \arabic{Ruecksteller}.\arabic{Zaehler}\\
+\stepcounter{Ruecksteller}
+e) Zaehler: \arabic{Ruecksteller}.\arabic{Zaehler}\\
+\refstepcounter{Zaehler}\label{Zaehler} 
+f) Zaehler: \arabic{Ruecksteller}.\arabic{Zaehler}\\ 
+\addtocounter{Zaehler}{4}
+g) Zaehler: \arabic{Ruecksteller}.\arabic{Zaehler}\\ 
+h) Zaehler: \roman{Ruecksteller}.\Alph{Zaehler}\\
+Auf den Zaehler \ref{Zaehler} von Seite \pageref{Zaehler} kann ich sogar verweisen.\\
+\subsection{Befehle}
+\subsubsection{Parameterlose Befehle}
+\paragraph{Neuer Befehl}
+\begin{verbatim}\newcommand{\befehl}{Befehlsdefinition}\end{verbatim}
+\paragraph{Befehl ersetzen}
+\begin{verbatim}\renewcommand {\befehl} {Befehlsdefinition}\end{verbatim}
+\paragraph{Befehl nur erstellen wenn nicht vorhanden}
+\begin{verbatim}\providecommand{\befehl}{Eventuelle Befehlsdefinition}\end{verbatim}
+\subsubsection{Befehle mit Parametern (max. 9)}
+\begin{verbatim}\newcommand{\befehl}[Parameteranzahl]{Befehlsdefinition}\end{verbatim}
+\paragraph{Beispiel}
+\subparagraph{Quelltext}
+\begin{verbatim}
+\newcommand {\rede}[2] {{\bfseries #1:}{\slshape \frqq #2\flqq\par}}
+\rede{Erste Hexe}{Wann treffen ... , Wetterstrahl?}
+\rede{Zweite Hexe}{Wenn ... gewonnen.}
+\end{verbatim}
+\subparagraph{Ausgabe}
+\hfill \\ \hfill \\
+\newcommand {\rede}[2] {{\bfseries #1:}{\slshape \frqq #2\flqq\par}}
+\rede{Erste Hexe}{Wann treffen wir drei uns das nächstemal Bei Regen, Donner, Wetterstrahl?}
+\rede{Zweite Hexe}{Wenn der Wirrwarr ist zerronnen, Schlacht verloren und gewonnen.}
+\subsubsection{Befehle mit optionalem Parameter}
+\begin{verbatim}\newcommand{\befehl}[Anzahl][Voreinstellung]{Befehlsdefinition}\end{verbatim}
+\paragraph{Beispiel}
+\subparagraph{Quelltext}
+\begin{verbatim}
+\newcommand {\optrede}[3][\unskip]{{\bfseries #2 {\mdseries #1}:}
+{\slshape \frqq #3\flqq}\par}
+\optrede[zur zweiten Hexe]{Erste Hexe}{Wann treffen ... , Wetterstrahl?}
+\optrede{Zweite Hexe}{Wenn ... gewonnen.}
+\end{verbatim}
+\subparagraph{Ausgabe}
+\hfill \\ \hfill \\
+\newcommand {\optrede}[3][\unskip]{{\bfseries #2 {\mdseries #1}:}%
+{\slshape \frqq #3\flqq}\par}
+\optrede[zur zweiten Hexe]{Erste Hexe}{Wann treffen wir drei uns das nächstemal Bei Regen, Donner, Wetterstrahl?}
+\optrede{Zweite Hexe}{Wenn der Wirrwarr ist zerronnen, Schlacht verloren und gewonnen.}
+\subsection{Umgebungen}
+\subsubsection{Parameterlose Umgebung}
+\paragraph{Neue Umgebung}
+\begin{verbatim}\newenvironment{Umgebung}{Anfangsdefinition}{Endedefinition}\end{verbatim}
+\paragraph{Umgebung ersetzen}
+\begin{verbatim}\renewenvironment{Umgebung}{Anfangsdefinition}{Endedefinition}\end{verbatim}
+\paragraph{Umgebung nur erstellen wenn nicht vorhanden}
+\begin{verbatim}\provideenvironment{Umgebung}{Anfangsdefinition}{Endedefinition}\end{verbatim}
+\subsubsection{Umgebung mit Parameter}
+\begin{verbatim}\newenvironment{Umgebung}[Anzahl]{Anfangsdefinition}{Endedefinition}\end{verbatim}
+\subsubsection{Umgebung mit optionalem Parameter}
+\begin{verbatim}\newenvironment{Umgebung}[Anzahl][Voreinstellung]
+{Anfangsdefinition}{Endedefinition}\end{verbatim}
+\paragraph{Beispiel}
+\subparagraph{Quelltext}
+\begin{verbatim}
+\newenvironment{umgrede}[2][\unskip]{{\bfseries #2 {\mdseries #1}:}
+\begin{slshape} \frqq}{\flqq \end{slshape}\\}
+\begin{umgrede}[zur zweiten Hexe]{Erste Hexe}
+Wann treffen ..., Wetterstrahl?
+\end{umgrede}
+\end{verbatim}
+\subparagraph{Ausgabe}
+\hfill \\ \hfill \\
+\newenvironment{umgrede}[2][\unskip]{{\bfseries #2 {\mdseries #1}:}\begin{slshape} \frqq}
+{\flqq \end{slshape}\\}
+\begin{umgrede}[zur zweiten Hexe]{Erste Hexe}Wann treffen wir drei uns das nächstemal Bei Regen, Donner, Wetterstrahl?\end{umgrede}
+\subsection{Listen}
+\subsubsection{description}
+\begin{verbatim}\renewcommand{\descriptionlabel}[Anzahl]{Befehlsdefinition}\end{verbatim}
+\subsubsection{itemize}
+\begin{verbatim}\renewcommand{\listenmarker}{Definition}\end{verbatim}
+\paragraph{Listenmarker:} \verb+labelitemi, labelitemii, labelitmeiii, labelitemiv+
+\pagebreak
+\subsubsection{enumerate}
+\begin{verbatim}
+\renewcommand{\Zählerausgabe}{\Ausgabeformat{Zähler}}
+\renewcommand{\Listenmarker}{Formatierung{\Zählerausgabe}}
+\end{verbatim}
+\paragraph{Listenmarker:} \verb+labelitemi, labelitemii, labelitemiii, labelitemv+
+\paragraph{Zähler:} \verb+enumi, enumii, enumiii, enumiv+
+\paragraph{Zählerausgabe:} \verb+theenumi, theenumii, theenumiii, theenumiv+
+\section{Seiten Layout}
+\subsection{Justierung der Seitengtöße}
+\subsubsection{Änderung der Papiergröße}
+\begin{verbatim}\setpapersize[Orientierung]{Format}\end{verbatim}
+Orientierung:\begin{verbatim}landscape, portrait\end{verbatim}
+Format:\begin{verbatim}A0, A1, A2, ... B9, USletter, USlegal\end{verbatim}
+\subsubsection{Justierung der Seitenelemente}
+\paragraph{Pakete}
+\begin{verbatim}
+\usepackage{vmargin}
+\end{verbatim}
+\paragraph{Befehle}
+\begin{verbatim}\setmargins{Links}{Oben}{Textbreite}{Texthöhe}{Kopfhöhe}
+{Kopfabstand}{Fußhöhe}{Fußabstand}\end{verbatim}
+oder
+\begin{verbatim}\setmarginsrb{Links}{Oben}{Rechts}{Unten}{Kopfhöhe}
+{Kopfabstand}{Fußhöhe}{Fußabstand}\end{verbatim}
+\pagebreak
+\subsection{Seitenstile}
+\paragraph{Global}
+\begin{verbatim}\pagestyle{Seitenstil}\end{verbatim}
+\paragraph{nur für aktuelle Seite}
+\begin{verbatim}\thispagestyle{Seitenstil}\end{verbatim}
+Übersicht über die Seitenstiloptionen siehe Tabelle \ref{ssopt} auf Seite \pageref{ssopt}
+\begin{table}
+\centering
+\begin{tabular}{|>{\columncolor{lightgray}}ll|}
+\firsthline\rowcolor{gray}\textcolor{White}{Stil} & \textcolor{White}{Wirkung}\\
+empty & Kopf- und Fußzeile leer\\
+plain & Leer mit zentrierter Seitennummer\\
+headings & Infos gemäß Klasse und Seitennummer\\
+myheadings & Leere Fuß- und anpassbare Kopfzeile\\
+fancy & Flexibler Stil mit dem Paket fancyhdr\\
+\lasthline
+\end{tabular}
+\caption{Übersicht über die Seitenstile}
+\label{ssopt}
+\end{table}
+\subsubsection{fancyhdr}
+\paragraph{Pakete}
+\begin{verbatim}\usepackage{fancyhdr}\end{verbatim}
+\paragraph{Einseitiger Text oder gerade / ungerade Seite egal}
+\begin{verbatim}\fancyhf[Feldselektoren]{Elementdefinition}\end{verbatim}
+\paragraph{Zweiseitiger Text}
+\begin{verbatim}\fancyhead[Feldselektoren]{Elementdefinition}\end{verbatim}
+\begin{verbatim}\fancyfoot[Feldselektoren]{Elementdefinition}\end{verbatim}
+\paragraph{Umdefinition bestehender Seitenstile}
+\begin{verbatim}\fancypagestyle{Seitenstil}{Neue Definition}\end{verbatim}
+Übersicht über die Feldselektoren siehe Tabelle \ref{fsel} auf Seite \pageref{fsel}
+\begin{table}
+\centering
+\begin{tabular}{|>{\columncolor{lightgray}}ll|>{\columncolor{lightgray}}ll|>{\columncolor{lightgray}}ll|}
+\firsthline
+\rowcolor{gray}\textcolor{White}{Rand} && \textcolor{White}{Position} && \textcolor{White}{Seite} &\\
+H & Kopf & L & Links & O & Ungerade\\
+F & Fuß & C & Mitte & E & Gerade\\
+ & & R & Rechts & &\\
+\lasthline
+\end{tabular}
+\caption{Übersicht über die Feldselektoren}
+\label{fsel}
+\end{table}
+\paragraph{Elementdefinitionen}
+\hfill \\ \hfill \\
+Seitenzahl:\begin{verbatim}\thepage\end{verbatim}
+Übergeordnete Gliederungsebene:\begin{verbatim}\leftmark\end{verbatim}
+Untergeordnete Gliederungsebene:\begin{verbatim}\rightmark\end{verbatim}
+Großschreibung verhindern:\begin{verbatim}\nouppercase\end{verbatim}
+\paragraph{Trennlinien}
+\hfill \\ \hfill \\
+Kopfzeile:\begin{verbatim}\renewcommand{\headrulewidth}{Linienbreite}\end{verbatim}
+Fußzeile:\begin{verbatim}\renewcommand{\footrulewidth}{Linienbreite}\end{verbatim}
+\paragraph{Beispiel}
+\subparagraph{Quellext}
+\begin{verbatim}
+\usepackage{fancyhdr}
+\fancyhf{}
+\fancyhead[RO,LE]{\sffamily\bfseries \thepage}
+\fancyhead[LO,RE]{\nouppercase{\sffamily\leftmark}}
+\fancyhf[FC]{\sffamily Meine Diplomarbeit}}
+\pagestyle{fancy}
+\end{verbatim}
+\pagebreak
+\subsection{Mehrspaltensatz}
+\paragraph{Pakete}
+\begin{verbatim}\usepackage{multicol}\end{verbatim}
+\paragraph{Global}
+\begin{verbatim}\documentclass[twocolumn]{Dokumentklasse}\end{verbatim}
+\paragraph{Lokal}
+\begin{verbatim}\begin{multicols}{Spalten}[Vortext][Abstand]Inhalt\end{multicols}\end{verbatim}
+Spalten: Anzahl der Spalten\\
+Vortext: Ein Text der über den Spalten steht\\
+Abstand: minimaler Platz damit der Spaltensatz noch auf der aktuellen Seite beginnt
+\paragraph{Beispiel}
+\subparagraph{Quelltext}
+\begin{verbatim}\begin{multicols}{3}[Mehrspaltensatz][1cm]Lorem ... amet\end{multicols}\end{verbatim}
+\subsubsection*{Ausgabe}
+%\hfill \\ \hfill \\
+\begin{multicols}{3}[Mehrspaltensatz][1cm]Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet\end{multicols}
+\section{Mathematische Formeln}
+\paragraph{Pakete}
+\begin{verbatim}
+\usepackage{calc}
+\usepackage{amsmath}
+\usepackage[intlimits]{empheq}
+\usepackage{amssymb,mathrsfs}
+\usepackage{theorem}
+\end{verbatim}
+\stepcounter{subsection}
+\subsection{Formeln im Dokument}
+\subsubsection{Formeln im Text}
+\begin{verbatim}\begin{math} Formel \end{math}\end{verbatim}
+\begin{verbatim}$ Formel $\end{verbatim}
+\begin{verbatim}\( Formel \)\end{verbatim}
+\subsubsection{Abgesetzte Formeln}
+Mit Nummerierung:
+\begin{verbatim}\begin{equation} Formel \end{equation}\end{verbatim}
+Ohne Nummerierung:
+\begin{verbatim}\begin{equation*} Formel \end{equation*}\end{verbatim}
+\begin{verbatim}\[ Formel \]\end{verbatim}
+\subsubsection{Referenzen auf Formeln}
+Label setzen:
+\begin{verbatim}\label{FormelLabel}\end{verbatim}
+Ausgabe durch:
+\begin{verbatim}\eqref{FormelLabel}\end{verbatim}
+\subsection{Mathematische Ausdrücke}
+\subsubsection{Mathematische Zeichen}
+\begin{tabbing}
+\hspace{2cm}\=\kill
+$\infty$\>\verb+\infty+\\
+$\leftarrow \leftrightarrow \uparrow$\>\verb+\leftarrow \leftrightarrow \uparrow+\\
+$\Rightarrow \Updownarrow \Downarrow$\>\verb+\Rightarrow \Updownarrow \Downarrow+\\
+$\omega\Delta$\>\verb+\omega\Delta+\\
+\end{tabbing}
+\subsubsection{Idizes und Exponenten}
+\begin{tabbing}
+\hspace{2cm}\=\kill
+$a^b$\>\verb+a^b+\\
+$c_d$\>\verb+c_d+\\
+$e^{fg}$\>\verb+e^{fg}+\\
+$h^{ij}_k$\>\verb+h^{ij}_k+\\
+\end{tabbing}
+\subsection{Brüche \& Wurzeln}
+\begin{tabbing}
+\hspace{2cm}\=\kill
+$\frac{a}{b}=c$\>\verb+\frac{a}{b}=c+\\
+$\sqrt[d]{e}$\>\verb+\sqrt[d]{e}+\\
+\end{tabbing}
+\subsection{Summen und Integrale}
+\begin{tabbing}
+\hspace{2cm}\=\kill
+$\sum\limits_{k=-\infty}^{\infty}23$\>\verb+\sum\limits_{k=-\infty}^{\infty}23+\\
+$\int\limits_{-\infty}^{\infty}f(x)$\>\verb+\int\limits_{-\infty}^{\infty}f(x)+\\
+\end{tabbing}
+\section{Verzeichnisse}
+\subsection{Stichwortverzeichnis}
+\paragraph{Pakete}
+\begin{verbatim}
+\usepackage{makeidx}
+\makeindex
+\end{verbatim}
+\subsubsection{Erstellen eines Stichwortverzeichnisses}
+setzen eines Indexeintrags:
+\begin{verbatim}\index{indexeintrag}\end{verbatim}
+Ausgabe durch:
+\begin{verbatim}\printindex\end{verbatim}
+Übersicht über die Syntax zum erstellen von Stichwortverzeichnissen siehe Tabelle \ref{swvz} auf Seite \pageref{swvz}
+\begin{table}
+\centering
+\begin{tabular}{|>{\columncolor{lightgray}}ll|}
+\firsthline\rowcolor{gray}\textcolor{white}{Zeichen}&\textcolor{White}{Bedeutung}\\
+\verb+@+&Trennt Schlüssel und Eintrag\\
+\verb+"+&Maskierungszeichen\\
+\verb+!+&Nebeneintrag\\
+\verb+|+&Formatierung der Seitennummer \\
+\verb+|(+&Beginn Seitenbereich\\
+\verb+|)+&Ende Seitenbereich\\
+\verb+|see{Text}+&Querverweis\\
+\lasthline
+\end{tabular}
+\caption{Übersicht über die Syntax zum erstellen von Stichwortverzeichnissen}
+\label{swvz}
+\end{table}
+\subsection{Literaturverzeichnis}
+\subsubsection{Manuelles Verzeichnis}
+\paragraph{Zitieren}
+\begin{verbatim}
+\cite[Text]{Schlüssel}
+\end{verbatim}
+\paragraph{Ausgabe des Literaturverzeichnisses}
+\begin{verbatim}
+\begin{thebibliography}
+	\bibitem[Marke]{Schlüssel} Formatierter Eintrag
+\end{thebibliography}
+\end{verbatim}
+\subsubsection{Bib\TeX}
+\paragraph{Einträge in Präambel}
+\begin{verbatim}
+\bibliographystyle{Stilname}
+\end{verbatim}
+\begin{table}
+\centering
+\begin{tabular}{|>{\columncolor{lightgray}}lll|}
+\firsthline\rowcolor{gray}\textcolor{White}{Name} & \textcolor{White}{Sortierung} & \textcolor{White}{Verweise} \\
+plain & alphabetisch & numerisch [1]\\
+unsrt & reihenfolge & numerisch [1]\\
+alpha & alphabetisch & Autor-Jahr [Autor98]\\
+abbrv & alphabetisch, gekürzt & numerisch [1]\\
+\lasthline
+\end{tabular}
+\caption{Übersicht über einige Zitierstile}
+\label{stiltab}
+\end{table}
+Eine Übersicht über einige Zitierstile ist in der Tabelle \ref{stiltab} auf Seite \pageref{stiltab} zu finden.
+\paragraph{Zitieren}
+\begin{verbatim}\cite[Text]{Schlüssel}\end{verbatim}
+\paragraph{Ausgabe des Literaturverzeichnisses}
+\begin{verbatim}\bibliography{Datenbankname ohne Endung}\end{verbatim}
+Ausgabe eines Eintrages im Literaturverzeichnis ohne erscheinen im Text
+\begin{verbatim}\nocite{Schlüssel}\end{verbatim}
+Ausgabe aller Einträge der Literaturdatenbank:
+\begin{verbatim}\nocite{*}\end{verbatim}
+\section{Boxen}
+\stepcounter{subsection}
+\subsection{LR-Boxen}
+\subsubsection{Variable Breite}
+Ohne Rahmen:
+\begin{verbatim}
+\mbox{Text}
+\end{verbatim}
+Mit Rahmen: 
+\begin{verbatim}
+\fbox{Text}
+\end{verbatim}
+Änderung der Rahmenbreite:
+\begin{verbatim}
+\setlength{\fboxrule}{Rahmenbreite}
+\end{verbatim}
+Änderung des Rahmenabstands:
+\begin{verbatim}
+\setlength{\fboxsep}{Rahmenabstand}
+\end{verbatim}
+\paragraph{Beispiel}
+\subparagraph{Quelltext}
+\begin{verbatim}
+\fbox{Ein gerahmter Text}\\
+\setlength{\fboxrule}{2pt}\setlength{\fboxsep}{2mm}
+\fbox{Ein fett gerahmter Text}
+\end{verbatim}
+\subparagraph{Ausgabe}
+\hfill \\ \hfill \\
+\fbox{Ein gerahmter Text}\\
+\setlength{\fboxrule}{2pt}\setlength{\fboxsep}{2mm}
+\fbox{Ein fett gerahmter Text}
+\setlength{\fboxrule}{0.5pt}\setlength{\fboxsep}{1mm}
+\pagebreak
+\subsubsection{Definierte Breite}
+Ohne Rahmen:
+\begin{verbatim}
+\makebox[Breite][Position]{Text}
+\end{verbatim}
+Mit Rahmen
+\begin{verbatim}
+\framebox[Breite][Position]{Text}
+\end{verbatim}
+Position: linksbündig (l), rechtsbündig (r), zentriert(c), gedehnt (s)\par
+\paragraph{Beispiel}
+\subparagraph{Quelltext}
+\begin{verbatim}
+{\huge \LaTeX}\\
+\makebox[\widthof{\huge \LaTeX}][s]{\small\ist flexibel}}
+\par
+\framebox[1cm][c]{Zentriert}\\
+\framebox[1cm][l]{linksbündig}
+\end{verbatim}
+\subparagraph{Ausgabe}
+\hfill \\ \hfill \\
+{\huge \LaTeX}\\
+\makebox[\widthof{\huge \LaTeX}][s]{\small ist flexibel}
+\par
+\framebox[1cm][c]{Zentriert}\\
+\framebox[1cm][l]{linksbündig}
+\subsubsection{Boxen mit Hebung}
+\begin{verbatim}
+\raisebox{Hebung}[Tiefe][Höhe]{Text}
+\end{verbatim}
+\begin{tabbing}
+\hspace{2cm}\=\kill
+Hebung:\> vertikale Verschiebung negativ oder positiv\\
+Tiefe:\> vertikale Ausdehnung unabhängig vom Inhalt\\
+Höhe:\> vertikale Ausdehnung unabhängig vom Inhalt\
+\end{tabbing}
+\pagebreak
+\paragraph{Beispiel}
+\subparagraph{Quelltext}
+\begin{verbatim}
+H\raisebox{-0.8ex}{2}O ist Wasser\\
+L\raisebox{0.8ex}{2}P ist ein Lernraum\\[2mm]
+H\raisebox{-0.8ex}[0mm][0mm]{2}O ist Wasser\\
+L\raisebox{0.8ex}[0mm][0mm]{2}P ist ein Lernraum\\
+\end{verbatim}
+\subparagraph{Ausgabe}
+\hfill \\ \hfill \\
+H\raisebox{-0.8ex}{2}O ist Wasser\\
+L\raisebox{0.8ex}{2}P ist ein Lernraum\\[2mm]
+H\raisebox{-0.8ex}[0mm][0mm]{2}O ist Wasser\\
+L\raisebox{0.8ex}[0mm][0mm]{2}P ist ein Lernraum\\
+\subsection{Absatzboxen}
+\begin{verbatim}
+\parbox[Position][Höhe][Innenposition]{Breite}{Text}
+\end{verbatim}
+Position zur Grundlinie: zentriert (c), erste Zeile (t), letzte Zeile (b)\par
+Innenposition: linksbündig (l), rechtsbündig (r), zentriert(c), gedehnt (s)\par
+\paragraph{Beispiel}
+\subparagraph{Quelltext}
+\begin{verbatim}
+\parbox[t]{5cm}{Dies ist …}\hspace{5mm}
+\parbox[t]{\linewidth-5,5cm}{Diese Box…}
+\end{verbatim}
+\subparagraph{Ausgabe}
+\hfill \\ \hfill \\
+\parbox[t]{5cm}{Dies ist ein Box von 5cm Breite. Der Text ist mit der ersten Zeile ausgerichtet.}\hspace{5mm}
+\parbox[t]{\linewidth-5,5cm}{Diese Box hat einen Abstand von 5mm zur ersten Box. Als Breite wird der restliche zur Verfügung stehende Platz genutzt. Der Text ist auch hier mit der ersten Zeile ausgerichtet.}
+\subsection{Balkenboxen}
+\begin{verbatim}
+\rule[hebung]{breite}{Gesamthöhe}
+\end{verbatim}
+Hebung: Vertikale Verschiebung negativ oder positiv
+\paragraph{Beispiel}
+\subparagraph{Quelltext}
+\begin{verbatim}
+Querbalken \rule{2cm}{2mm} und
+Hochbalken \rule[-8mm]{2mm}{2cm}\\
+\end{verbatim}
+\subparagraph{Ausgabe}
+\hfill \\ \hfill \\
+Querbalken \rule{2cm}{2mm} und
+Hochbalken \rule[-8mm]{2mm}{2cm}\\
+\subsection{Boxregister}
+Neuer Registername:
+\begin{verbatim}
+\newsavebox{\Registername}
+\end{verbatim}
+Füllen des Registers:
+\begin{verbatim}
+\sbox{\Registername}{Text}
+\end{verbatim}
+Zusätzliches Formatiere des Registers:
+\begin{verbatim}
+\savebox{\Registername}[Breite][Position]{Text}
+\end{verbatim}
+Ausgabe des Registers:
+\begin{verbatim}
+\usebox{\Registername}
+\end{verbatim}
+\pagebreak
+\paragraph{Beispiel}
+\subparagraph{Quelltext}
+\begin{verbatim}
+\newsavebox{\bspbox}
+\sbox{\bspbox}{Test A}
+Hier wird \usebox{\bspbox} gesetzt\\
+\savebox{\bspbox}[2cm][l]{Test B}
+Hier wird \usebox{\bspbox} gesetzt\\
+\savebox{\bspbox}[2cm][r]{Test C}
+Hier wird \usebox{\bspbox} gesetzt\\
+\end{verbatim}
+\subparagraph{Ausgabe}
+\hfill \\ \hfill \\
+\newsavebox{\bspbox}
+\sbox{\bspbox}{Test A}
+Hier wird \usebox{\bspbox} gesetzt\\
+\savebox{\bspbox}[2cm][l]{Test B}
+Hier wird \usebox{\bspbox} gesetzt\\
+\savebox{\bspbox}[2cm][r]{Test C}
+Hier wird \usebox{\bspbox} gesetzt\\
+
+\section{Farben, Bilder und PDF-Spezialitäten}
+\subsection{Einbinden von PDF-Dokumenten}
+\paragraph{Pakete}
+\begin{verbatim}
+\usepackage{pdfpages}
+\end{verbatim}
+Einbinden der PDF-Dokumente:
+\begin{verbatim}
+\includepdf[Schlüssel=Wert, Schlüssel=Wert, ...]{Dateiname ohne Endung}
+\end{verbatim}
+Übersicht über die Schlüssel siehe Tabelle \ref{pdfschl} auf Seite \pageref{pdfschl}
+\begin{table}
+\centering
+\begin{tabular}{|l>{\columncolor{lightgray}}ll|}
+\firsthline\rowcolor{gray}\textcolor{White}{Schlüssel} &\textcolor{White}{Werte}  & \textcolor{White}{Beschreibung} \\\hline
+\rowcolor{gray}pages&&Legt die eingebundenen Seiten fest\\
+& - & Alle Seiten\\
+&\{a-b\}&Seitenbereich a bis b, beginnend mit a\\
+&a&Einzelne Seite\\
+&\{a,b,c\}&Mehrere einzelne Seiten\\
+&\{\}&Leere Seite\\
+&last&Letzte Seite\\
+&\{a,\{b-c\},\{\},d,\{last-e\}\}&Beliebige Kombination, in Reihenfolge der Nennung\\
+\rowcolor{gray}nup&&Mehrere Seiten auf einer Seite\\
+&axb&Anzahl horizontal x Anzahl vertikal\\
+\rowcolor{gray}addtotoc&&Nimmt die eingebundene PDF ins IVZ auf\\
+&\{a,&Nummer der ersten eingebundenen Seite\\
+&Ebene,&IVZ-Ebene: chapter, section, subsection...\\
+&b,&Nummerierungsebene im IVZ\\
+&Dokumentname,&Eintrag im IVZ\\
+&Labelname\}&Label für Referenz auf eingebundene PDF\\
+\lasthline
+\end{tabular}
+\caption{Übersicht über ausgewählte Schlüssel von includepdf}
+\label{pdfschl}
+\end{table}
+\paragraph{Beispiel}
+\subparagraph{Quelltext}
+\begin{verbatim}
+\includepdf[pages={2,{4-6},3,{},9,{last-10},
+addtotoc={2,section,Auszüge aus meinem Dokument,1,labelDok}]{Dokument1}
+\end{verbatim}
+\subsection{Einbinden externer Abbildungen}
+\paragraph{Pakete}
+\begin{verbatim}
+\usepackage[pdftex]{graphicx}
+\end{verbatim}
+Setzen der Abbildung:
+\begin{verbatim}
+\includegraphics[Schlüssel=Wert, Schlüssel=Wert, …]{Dateiname}
+\end{verbatim}
+Übersicht über die Schlüssel siehe Tabelle \ref{schl} auf Seite \pageref{schl}; viele weitere Schlüssel aus Tabelle \ref{schl} auf Seite \pageref{schl} funktionieren auch.
+\begin{table}
+\centering
+\begin{tabular}{|>{\columncolor{lightgray}}ll|}
+\firsthline\rowcolor{gray}\textcolor{White}{Schlüssel} & \textcolor{White}{Beschreibung} \\
+width & Breite\\
+height & Höhe\\
+totalheight & Summe aus Höhe/Tiefe\\
+keepaspectratio & Seitenverhältnisse beibehalten (\verb+true+[standard]/\verb+false+)\\
+viewport & Darstellungsfeld (linke Untere/rechte Obere) z.B. 0mm 0mm 7mm 7mm\\
+trim & wie viewport, jedoch von den Rändern (Links, Unten, Rechts, Oben)\\
+angle & Rotationswinkel in Grad gegen den Uhrzeigersinn\\
+origin & Setzt Drehpunkt (optional: \verb+t, b+, kombiniert mit \verb+l, c, r+)\\
+scale & Skalierungsfaktor\\
+clip & Eingabegraphik auf Ausgabegraphik (\verb+true+[standard]/\verb+false+)\\
+draft & Gibt leeren Rahmen aus (\verb+true+[standard]/\verb+false+)\\
+page & Darzustellende Seite bei eingebundenen PDFs\\
+resolution & Auflösung in DPI\\
+\lasthline
+\end{tabular}
+\caption{Übersicht über die Schlüssel von includegraphics}
+\label{schl}
+\end{table}
+\subsubsection{Gleitende Abbildungen}
+\begin{verbatim}
+\begin{figure}[optionen]Gleitender Abbildungsinhalt\end{figure}
+\end{verbatim}
+\pagebreak
+\paragraph{Beispiel}
+\subparagraph{Quelltext}
+\begin{verbatim}
+\begin{figure}
+\centering
+\includegraphics[height=2.5cm,angle=90]{Bild.png}
+\caption{Abbildung in der figure Umgebung}
+\label{abbfig}
+\end{figure}
+\end{verbatim}
+\subparagraph{Ausgabe}
+\hfill \\ \hfill \\
+Die Abbildung \ref{abbfig} befindet sich auf Seite \pageref{abbfig}
+\begin{figure}
+\centering
+\includegraphics[height=2.5cm,angle=90]{Bild.png}
+\caption{Abbildung in der figure Umgebung}
+\label{abbfig}
+\end{figure}
+\subsubsection{Abbildungsverzeichnis}
+\begin{verbatim}\listoffigures\end{verbatim}
+\subsubsection{Zusammengesetzte Abbildungen}
+\paragraph{Pakete}
+\begin{verbatim}
+\usepackage{subfig}
+\end{verbatim}
+Eintrag in einer figure Umgebung:
+\begin{verbatim}
+\subfloat[Listeneintrag][Beschriftung]{Abbildungsinhalt}
+\end{verbatim}
+Referenzieren:
+\begin{verbatim}
+\subref{Marke}
+\subref*{Marke}
+\end{verbatim}
+\paragraph{Beispiel}
+\subparagraph{Quelltext}
+\begin{verbatim}
+\begin{figure}
+\centering
+\subfloat[\mbox{Normal}]{\includegraphics[height=2.5cm]{Bild.png}\label{sflimga}}
+\qquad
+\subfloat[Gedreht]{\includegraphics[height=2.5cm,angle=90]{Bild.png}\label{sflimgb}}
+\caption{Eine zusammengesetzte Abbildung}
+\label{sflimg}
+\end{figure}
+\end{verbatim}
+\subparagraph{Ausgabe}
+\hfill \\ \hfill \\
+Die Abbildung \ref{sflimg}, bestehend aus den Teilabbildungen \subref{sflimga} und  \subref{sflimgb}, befindet sich auf Seite \pageref{sflimg}.
+\begin{figure}
+\centering
+\subfloat[Normal]{\includegraphics[height=2.5cm]{Bild.png}\label{sflimga}}
+\qquad
+\subfloat[Gedreht]{\includegraphics[height=2.5cm,angle=90]{Bild.png}\label{sflimgb}}
+\caption{Eine zusammengesetzte Abbildung}
+\label{sflimg}
+\end{figure}
+\pagebreak
+\subsubsection{Mischung von Text und Abbildungen}
+\paragraph{Pakete}
+\begin{verbatim}
+\usepackage{wrapfig}
+\end{verbatim}
+Einbinden von Graphiken in Text:
+\begin{verbatim}
+\begin{wrapfigure}[Zeilen]{Position}{Breite}
+Abbildungsinhalt
+\end{wrapfigure}
+\end{verbatim}
+\begin{tabbing}
+\hspace{2cm}\=\kill
+Zeilen:\> optionale Anzahl der Zeilen\\
+Position:\> Links (l) oder Rechts (r)\\
+Breite:\> reservierte Breite\\
+\end{tabbing}
+\subsection{Rotation und Skalierung von Inhalten}
+\subsubsection{Inhalte rotieren}
+\begin{verbatim}
+\rotatebox[Schlüssel=Wert, Schlüssel=Wert, …]{Dateiname}
+\end{verbatim}
+Übersicht über die Schlüssel siehe Tabelle \ref{schlr} auf Seite \pageref{schlr}
+\begin{table}
+\centering
+\begin{tabular}{|>{\columncolor{lightgray}}ll|}
+\firsthline\rowcolor{gray}\textcolor{White}{Schlüssel} & \textcolor{White}{Beschreibung} \\
+units & Einheit der vollen Drehung: 6.283185 = Bogenmaß\\
+x & Horizontale Position des Drehpunkts\\
+y & Vertikale Position des Drehpunkts\\
+origin & Setzt Drehpunkt (optional: \verb+t, b+, kombiniert mit \verb+l, c, r+)\\
+\lasthline
+\end{tabular}
+\caption{Übersicht über die Schlüssel von rotatebox}
+\label{schlr}
+\end{table}
+\paragraph{Beispiel}
+\subparagraph{Quelltext}
+\begin{verbatim}
+normal\rotatebox[origin=c]{25}{gedreht}normal
+\end{verbatim}
+\subparagraph{Ausgabe}
+\hfill \\ \hfill \\
+normal\rotatebox[origin=c]{25}{gedreht}normal
+\subsubsection{Inhalte skalieren}
+\begin{verbatim}
+\scalebox{Horizontalfaktor}[Vertikalfaktor]{Text}
+\end{verbatim}
+\paragraph{Beispiel}
+\subparagraph{Quelltext}
+\begin{verbatim}
+Normal, \scalebox{2}{verdoppelt}, \scalebox{0.5}{halbiert}, 
+\scalebox{2}[1]{verbreitert}, \scalebox{0.5}[1]{gestaucht}, 
+\scalebox{-1}[1]{gespiegelt}
+\end{verbatim}
+\subparagraph{Ausgabe}
+\hfill \\ \hfill \\
+Normal, \scalebox{2}{verdoppelt}, \scalebox{0.5}{halbiert}, \scalebox{2}[1]{verbreitert}, \scalebox{0.5}[1]{gestaucht}, 
+\scalebox{-1}[1]{gespiegelt}
+\subsection{Farbe}
+\paragraph{Pakete}
+\begin{verbatim}
+\usepackage[svgnames,table,hyperref]{xcolor}
+\end{verbatim}
+Eine kleine Auswahl an Farben wird in Tabelle \ref{colo} auf Seite \pageref{colo} aufgeführt.\par
+\begin{table}
+\centering
+\begin{tabular}{lllll}
+{\color{red}\rule{10mm}{3mm}}\quad red &
+{\color{blue}\rule{10mm}{3mm}}\quad blue &
+{\color{brown}\rule{10mm}{3mm}}\quad brown &
+{\color{cyan}\rule{10mm}{3mm}}\quad cyan \\
+{\color{darkgray}\rule{10mm}{3mm}}\quad darkgray &
+{\color{gray}\rule{10mm}{3mm}}\quad gray &
+{\color{green}\rule{10mm}{3mm}}\quad green &
+{\color{lightgray}\rule{10mm}{3mm}}\quad lightgray &\\
+{\color{magenta}\rule{10mm}{3mm}}\quad magenta &
+{\color{orange}\rule{10mm}{3mm}}\quad orange&
+{\color{purple}\rule{10mm}{3mm}}\quad purple &
+{\color{red}\rule{10mm}{3mm}}\quad red \\
+{\color{violet}\rule{10mm}{3mm}}\quad violet &
+{\color{white}\rule{10mm}{3mm}}\quad white &
+{\color{yellow}\rule{10mm}{3mm}}\quad yellow \\
+\end{tabular}
+\caption{Einige zur Verfügung stehende Farben}
+\label{colo}
+\end{table}
+\subsubsection{Farbiger Text}
+\begin{verbatim}
+{\color{Farbe}Text}
+\textcolor{Farbe}{Text}
+\end{verbatim}
+\subsubsection{Farbiger Texthintergrund}
+\begin{verbatim}
+\colorbox{Farbe}{Text}
+\end{verbatim}
+\subsubsection{Farbige Rahmen}
+\begin{verbatim}
+{\fcolorbox{Rahmenfarbe}{Hintergrundfarbe}{Text}
+\end{verbatim}
+\subsubsection{Seitenfarbe}
+\begin{verbatim}
+\pagecolor{green}\end{verbatim}
+\paragraph{Beispiel}
+\subparagraph{Quelltext}
+\begin{verbatim}
+{\fcolorbox{red}{blue}{\textcolor{yellow}{Alles Farbig!}}
+\end{verbatim}
+\subparagraph{Ausgabe}
+\hfill \\ \hfill \\
+{\fcolorbox{Red}{Blue}{\textcolor{Yellow}{Alles Farbig!}}
+\subsection{Hypertext in PDF- Dokumenten}
+\paragraph{Pakete}
+\begin{verbatim}
+\usepackage{hyperref}
+\end{verbatim}
+\subsubsection{Interaktives Lesezeichen}
+\paragraph{Pakete}
+\begin{verbatim}
+\usepackage[bookmarks,hyperindex]{hyperref}
+\end{verbatim}
+\subsubsection{Händische Verlinkung}
+\paragraph{Externe (Webseiten)}
+\begin{verbatim}
+\url{URL}
+\href{URL}{Angezeigter Text}
+\end{verbatim}
+\paragraph{Beispiel}
+\subparagraph{Quelltext}
+\begin{verbatim}
+\url{http://fit.rwth-aachen.de/}\\
+\href{http://fit.rwth-aachen.de/}{fIT - fit in IT}
+\end{verbatim}
+\subparagraph{Ausgabe}
+\hfill \\ \hfill \\
+\url{http://fit.rwth-aachen.de/}\\
+\href{http://fit.rwth-aachen.de/}{fIT - fit in IT}
+\paragraph{Interne (Textstellen)}
+\hfill \\ \hfill \\
+Anker setzen:
+\begin{verbatim}
+\hypertarget{Anker}{Text}
+\end{verbatim}
+Auf Anker verweise:
+\begin{verbatim}
+\hyperlink{Anker}{Text}
+\end{verbatim}
+\end{document}
