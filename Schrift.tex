@@ -1,0 +1,115 @@
+\documentclass{scrartcl} 
+\usepackage[T1]{fontenc} 
+\usepackage[utf8]{inputenc} 
+\usepackage[ngerman]{babel} 
+\usepackage{marvosym} 
+%\usepackage{lmodern} 
+\usepackage{parskip}
+\tolerance=2000 
+\setlength{\emergencystretch}{20pt}
+\usepackage{yfonts}
+\usepackage{enumerate}
+
+\begin{document}
+
+
+\begin{sffamily} %wichtig nicht vergessen！！！！！！%
+Eine \textit{Kombination aus \textbf{Schriftfamilie}}, {\slshape {\ttfamily Schriftserie} und}{\scshape Schriftform}.
+\end{sffamily}  %wichtig nicht vergessen%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Dieses Dokument benutzt die Dokumentklasse\glq article\grq{} und hat eine Schriftgröße von 11 pt.Hier beginne wir mit {\Huge\glqq Riesiger \grqq}.Beachtet also,dass die Befehle \flqq case sensitive\frqq{} sind.
+{\large\glqq\textbackslash large \grqq},
+{\Large\glqq\textbackslash Large \grqq} und
+{\LARGE\glqq\textbackslash lARGE}
+sind nicht die selben Befehle.
+Ander......auch {tiny\glqq winzige \grqq} Schriftgrößen einstellen.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\begin{verse}
+\textsc{Von Kapitälchen:} OHA! Wer sind sie Denn? Sie haben blabla .\\
+\textbf{Schwabacher:} Mein Name ist Prinzessin  blabla.\\
+\textsc{Von Käpitälchen:}:OK blabla kein Bock mehr abzuschreiben.
+\end{verse}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{itemize}
+\item Erster Aufzählungspunkt auf der ersten Stufen
+ \begin{enumerate}
+ \item Erster Unterpunkt auf der zweiten Ebene
+  \begin{description}
+  \item[Einschub:] Dritte  Ebene
+  
+      \begin{enumerate}
+      \item Vierte Ebene
+       \begin{itemize}
+         \item Fünfte Ebene
+       \end{itemize}
+      \item Zweite Punkt aud der vierte Ebene
+    \end{enumerate}
+  
+   \end{description}
+
+  \end{enumerate}
+
+\item Wieder eine Eben
+
+\end{itemize}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{tabbing}
+\textbf{Es folgt die erste Tabbing Umgebung:} \= \\
+\> ,um Problem zu vermeiden, \\
+soll der erste Tabstopp erst nach der längsten Zeilen erfolgen.
+
+\end{tabbing}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{tabbing}
+Es folgt die erste Tabbing Umgebung:\= \+\\
+ersten Zeile\\
+zweite Zeile\\ 
+\end{tabbing}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{tabbing}
+\textbf{Es folgt die zweiten Tabbing Umgebung:}  \\ \\
+Erster Tabstopp.\= Die nächste Zeile soll beim ersten Tabstopp beginnen.\+ \\ 
+ Hier ein weiterer Tabstopp. \= Die nächste Zeile beginnt bei Null.\- \\
+Die folgende Zeile beginnt beim zweite Tabstopp.\+\+ \\ 
+ Perfekt!
+\end{tabbing}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{tabbing}
+\textbf{Es folgt die dritte Tabbing Umgebung:}  \\ \\
+Fangen wer mit eimem Tabstopp an. \= Und setzen hier noch einen. \= \\    
+\>\>Rechtsbündig zum zweiten Tapstopp. \' \\
+\> Linksbündig zum ersten.\\
+\>\> Das was.
+\end{tabbing}
+
+
+
+
+
+
+
+
+
+\end{document}
